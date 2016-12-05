@@ -1,0 +1,42 @@
+﻿<UserControl x:Class="Snake.View.GameBoardView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             x:Name="Control">
+    
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Snake;component/Resources/SnakeResources.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+
+    <Grid Background="{StaticResource Snake.BackgroundBrush}">
+
+        <!-- Rows -->
+        <ItemsControl ItemsSource="{Binding RowsAndColumns}" Margin="2">
+            
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                 
+                    <!-- Columns -->
+                    <ItemsControl ItemsSource="{Binding }" ItemTemplate="{Binding CellDataTemplate, ElementName=Control}">
+                        
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <StackPanel Orientation="Horizontal"/>
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                        
+                    </ItemsControl>
+                    
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        
+        </ItemsControl>
+
+    </Grid>
+    
+</UserControl>

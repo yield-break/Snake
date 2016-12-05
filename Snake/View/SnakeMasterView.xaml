@@ -1,0 +1,172 @@
+﻿<UserControl x:Class="Snake.View.SnakeMasterView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:cell="clr-namespace:Snake.ViewModel.Cell"
+             xmlns:model="clr-namespace:Snake.Model"
+             xmlns:view="clr-namespace:Snake.View"
+             xmlns:behaviours="clr-namespace:jTech.Wpf.AttachedBehaviours;assembly=jTech.Wpf"
+             x:Name="Control">
+
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Snake;component/Resources/SnakeResources.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+
+    <Grid Background="{StaticResource Snake.BackgroundBrush}">
+        <behaviours:KeyBindingsAttachedBehaviours.OwnerWindowKeyBindings>
+            <InputBindingCollection>
+                <KeyBinding Key="Up" Command="{Binding SnakeMasterViewModel.ChangePlayerOneDirectionOfTravelCommand}">
+                    <KeyBinding.CommandParameter>
+                        <model:DirectionOfTravel>
+                            Up
+                        </model:DirectionOfTravel>
+                    </KeyBinding.CommandParameter>
+                </KeyBinding>
+                <KeyBinding Key="Right" Command="{Binding SnakeMasterViewModel.ChangePlayerOneDirectionOfTravelCommand}">
+                    <KeyBinding.CommandParameter>
+                        <model:DirectionOfTravel>
+                            Right
+                        </model:DirectionOfTravel>
+                    </KeyBinding.CommandParameter>
+                </KeyBinding>
+                <KeyBinding Key="Down" Command="{Binding SnakeMasterViewModel.ChangePlayerOneDirectionOfTravelCommand}">
+                    <KeyBinding.CommandParameter>
+                        <model:DirectionOfTravel>
+                            Down
+                        </model:DirectionOfTravel>
+                    </KeyBinding.CommandParameter>
+                </KeyBinding>
+                <KeyBinding Key="Left" Command="{Binding SnakeMasterViewModel.ChangePlayerOneDirectionOfTravelCommand}">
+                    <KeyBinding.CommandParameter>
+                        <model:DirectionOfTravel>
+                            Left
+                        </model:DirectionOfTravel>
+                    </KeyBinding.CommandParameter>
+                </KeyBinding>
+                <KeyBinding Key="W" Command="{Binding SnakeMasterViewModel.ChangePlayerTwoDirectionOfTravelCommand}">
+                    <KeyBinding.CommandParameter>
+                        <model:DirectionOfTravel>
+                            Up
+                        </model:DirectionOfTravel>
+                    </KeyBinding.CommandParameter>
+                </KeyBinding>
+                <KeyBinding Key="D" Command="{Binding SnakeMasterViewModel.ChangePlayerTwoDirectionOfTravelCommand}">
+                    <KeyBinding.CommandParameter>
+                        <model:DirectionOfTravel>
+                            Right
+                        </model:DirectionOfTravel>
+                    </KeyBinding.CommandParameter>
+                </KeyBinding>
+                <KeyBinding Key="S" Command="{Binding SnakeMasterViewModel.ChangePlayerTwoDirectionOfTravelCommand}">
+                    <KeyBinding.CommandParameter>
+                        <model:DirectionOfTravel>
+                            Down
+                        </model:DirectionOfTravel>
+                    </KeyBinding.CommandParameter>
+                </KeyBinding>
+                <KeyBinding Key="A" Command="{Binding SnakeMasterViewModel.ChangePlayerTwoDirectionOfTravelCommand}">
+                    <KeyBinding.CommandParameter>
+                        <model:DirectionOfTravel>
+                            Left
+                        </model:DirectionOfTravel>
+                    </KeyBinding.CommandParameter>
+                </KeyBinding>
+            </InputBindingCollection>
+        </behaviours:KeyBindingsAttachedBehaviours.OwnerWindowKeyBindings>
+        
+        <Grid>
+            
+            <!-- Game -->
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+        
+            <Grid Margin="10,4">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+            
+                <TextBlock Text="{Binding HighScore, StringFormat={}HIGH SCORE : {0}}" Foreground="{StaticResource Snake.ForegroundBrush}" FontSize="24" HorizontalAlignment="Left" Margin="0,0,2,0"/>
+
+                <TextBlock Grid.Column="1" Text="{Binding Score, StringFormat={}SCORE : {0}}" Foreground="{StaticResource Snake.ForegroundBrush}" FontSize="24" HorizontalAlignment="Right" Margin="2,0,0,0"/>
+
+            </Grid>
+        
+            <view:GameBoardView Grid.Row="1" DataContext="{Binding GameBoard}" HorizontalAlignment="Left" VerticalAlignment="Top">
+                <view:GameBoardView.CellDataTemplate>
+                    <DataTemplate>
+                    
+                        <Border Height="25" Width="25" Margin="1">
+                            <Border.Resources>
+                            
+                                <DataTemplate DataType="{x:Type cell:SnakeCellViewModel}">
+                                
+                                    <Border>
+                                        <Border.Style>
+                                            <Style TargetType="Border">
+
+                                                <Setter Property="Background" Value="{StaticResource Snake.ForegroundBrush}"/>
+
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding SnakeyToken}" Value="SnakeyOne">
+                                                        <Setter Property="Background" Value="{StaticResource Snake.SnakeyOneBrush}"/>
+                                                    </DataTrigger>
+                                                    <DataTrigger Binding="{Binding SnakeyToken}" Value="SnakeyTwo">
+                                                        <Setter Property="Background" Value="{StaticResource Snake.SnakeyTwoBrush}"/>
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            
+                                            </Style>
+                                        </Border.Style>
+                                    </Border>
+                                
+                                </DataTemplate>
+                            
+                                <DataTemplate DataType="{x:Type cell:SnakeTreatCellViewModel}">
+                                
+                                    <Border>
+                                        <Border.Style>
+                                            <Style TargetType="Border">
+                                            
+                                                <Setter Property="Background" Value="{StaticResource Snake.CherryTreatBrush}"/>
+
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding Treat}" Value="Cherry">
+                                                        <Setter Property="Background" Value="{StaticResource Snake.CherryTreatBrush}"/>
+                                                    </DataTrigger>
+                                                    <DataTrigger Binding="{Binding Treat}" Value="Apple">
+                                                        <Setter Property="Background" Value="{StaticResource Snake.AppleTreatBrush}"/>
+                                                    </DataTrigger>
+                                                    <DataTrigger Binding="{Binding Treat}" Value="Banana">
+                                                        <Setter Property="Background" Value="{StaticResource Snake.BananaTreatBrush}"/>
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            
+                                            </Style>
+                                        </Border.Style>
+                                    </Border>
+                                
+                                </DataTemplate>
+                            
+                            </Border.Resources>
+                        
+                            <ContentControl Content="{Binding Content}"/>
+                        
+                        </Border>
+                    
+                    </DataTemplate>
+                </view:GameBoardView.CellDataTemplate>
+            </view:GameBoardView>
+
+        </Grid>
+
+    </Grid>
+    
+</UserControl>

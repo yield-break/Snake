@@ -1,0 +1,21 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:converters="clr-namespace:Snake.Converters"
+                    xmlns:visConverter="clr-namespace:jTech.Wpf.Converters.VisibilityConverters;assembly=jTech.Wpf">
+
+    <converters:TestConverter x:Key="TestConverter"/>
+
+    <SolidColorBrush x:Key="Snake.BackgroundBrush" Color="Black"/>
+    <SolidColorBrush x:Key="Snake.ForegroundBrush" Color="DarkGreen"/>
+    <SolidColorBrush x:Key="Snake.SummaryOuterBrush" Color="White" Opacity="0.2"/>
+    <SolidColorBrush x:Key="Snake.SummaryBackgroundBrush" Color="DarkGreen" Opacity="0.8"/>
+    <SolidColorBrush x:Key="Snake.CherryTreatBrush" Color="Red"/>
+    <SolidColorBrush x:Key="Snake.AppleTreatBrush" Color="LawnGreen"/>
+    <SolidColorBrush x:Key="Snake.BananaTreatBrush" Color="Yellow"/>
+    <SolidColorBrush x:Key="Snake.SnakeyOneBrush" Color="#9376E3"/>
+    <SolidColorBrush x:Key="Snake.SnakeyTwoBrush" Color="#E37676"/>
+
+    <visConverter:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
+    <converters:GameModeEqualityConverter x:Key="GameModeEqualityConverter"/>
+
+</ResourceDictionary>

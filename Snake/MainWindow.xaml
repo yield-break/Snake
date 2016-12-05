@@ -1,0 +1,24 @@
+﻿<Window x:Class="Snake.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:Snake"
+        xmlns:view="clr-namespace:Snake.View"
+        xmlns:model="clr-namespace:Snake.Model"
+        Title="SnaKe" SizeToContent="WidthAndHeight"
+        Background="Gray">
+
+    <Window.DataContext>
+        <local:MainWindowViewModel/>
+    </Window.DataContext>
+    
+    <Grid>
+        
+        <!-- Snake -->
+        <view:SnakeMasterView DataContext="{Binding SnakeMasterViewModel}"/>
+
+        <!-- Game Summary -->
+        <view:SnakeGameSummaryView DataContext="{Binding GameSummary}"/>
+        
+    </Grid>
+    
+</Window>
